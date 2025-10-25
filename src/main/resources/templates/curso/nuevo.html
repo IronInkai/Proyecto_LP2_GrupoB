@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<title>Listado de Cursos</title>
+	<title>Nuevo Curso</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
@@ -41,7 +41,7 @@
 							<div class="col-md-6 position-relative">
 								<label for="categoria" class="form-label">Sede</label>
 								<div class="input-group">
-									<span class="input-group-text"><i class="fa-solid fa-tags"></i></i></span>
+									<span class="input-group-text"><i class="fa-solid fa-tags"></i></span>
 									<select class="form-select" th:field="*{sede}">
 										<option value="" selected hidden="hidden">--Seleccione--
 										</option>
@@ -54,7 +54,7 @@
 							<div class="col-md-6 position-relative">
 								<label for="categoria" class="form-label">Aula</label>
 								<div class="input-group">
-									<span class="input-group-text"><i class="fa-solid fa-tags"></i></i></span>
+									<span class="input-group-text"><i class="fa-solid fa-tags"></i></span>
 									<select class="form-select" th:field="*{aula}">
 										<option value="" selected hidden="hidden">--Seleccione--
 										</option>
@@ -67,7 +67,7 @@
 							<div class="col-md-6 position-relative">
 								<label for="categoria" class="form-label">Horario</label>
 								<div class="input-group">
-									<span class="input-group-text"><i class="fa-solid fa-tags"></i></i></span>
+									<span class="input-group-text"><i class="fa-solid fa-tags"></i></span>
 									<select class="form-select" th:field="*{horario}">
 										<option value="" selected hidden="hidden">--Seleccione--
 										</option>
@@ -80,7 +80,7 @@
 							<div class="col-md-6 position-relative">
 								<label for="categoria" class="form-label">Docente</label>
 								<div class="input-group">
-									<span class="input-group-text"><i class="fa-solid fa-tags"></i></i></span>
+									<span class="input-group-text"><i class="fa-solid fa-tags"></i></span>
 									<select class="form-select" th:field="*{docente}">
 										<option value="" selected hidden="hidden">--Seleccione--
 										</option>
@@ -110,38 +110,8 @@
 			</div>
 		</div>
 	</div>
-	</th:block>
-	<th:block th:fragment="scripts">
-		<script type="text/javascript">
-			$(document)
-				.ready(
-					function () {
-						$("")
-							.validate(
-								{
-									rules: {
-
-									},
-									messages: {
-
-									},
-									errorElement: 'div',
-									errorClass: 'invalid-tooltip',
-									highlight: function (element) {
-										$(element).addClass(
-											'is-invalid')
-											.removeClass(
-												'is-valid');
-									},
-									unhighlight: function (element) {
-										$(element).removeClass(
-											'is-invalid')
-											.addClass(
-												'is-valid');
-									}
-								});
-					});
-		</script>
+	<th:block th:utext="${alert}"></th:block>
+	
 </body>
 
 </html>
