@@ -1,0 +1,147 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Listado de Cursos</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+	<div class="container mt-5">
+		<div class="card shadow-lg">
+			<div class="card-body">
+				<h1 class="card-title text-center">Nuevo Curso</h1>
+				<div class="row d-flex justify-content-center">
+					<div class="col-md-6">
+						<form class="row g-2" method="post" novalidate th:object="${curso}"
+							th:action="@{/curso/registrar}">
+							<div class="col-md-12 position-relative">
+								<label for="descripcion" class="form-label"> Nombre del curso </label>
+								<input type="text" class="form-control" th:field="*{nombreCurso}"
+									placeholder="Ingrese una descripción" required>
+							</div>
+							<div class="col-md-6 position-relative">
+								<label for="fechaNacimiento" class="form-label">Fecha de inicio</label>
+								<div class="input-group">
+									<span class="input-group-text"><i class="fa-solid fa-calendar-days"></i></span>
+									<input type="date" id="fechaInicio" class="form-control" th:field="*{fechaInicio}">
+								</div>
+							</div>
+							<div class="col-md-6 position-relative">
+								<label for="fechaNacimiento" class="form-label">Fecha de fin</label>
+								<div class="input-group">
+									<span class="input-group-text"><i class="fa-solid fa-calendar-days"></i></span>
+									<input type="date" id="fechaFin" class="form-control" th:field="*{fechaFin}">
+								</div>
+							</div>
+							<div class="col-md-6 position-relative">
+								<label for="categoria" class="form-label">Sede</label>
+								<div class="input-group">
+									<span class="input-group-text"><i class="fa-solid fa-tags"></i></i></span>
+									<select class="form-select" th:field="*{sede}">
+										<option value="" selected hidden="hidden">--Seleccione--
+										</option>
+										<option th:each="item:${lstSede}" th:value="${item.idSede}"
+											th:text="${item.nombreSede}">
+										</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-6 position-relative">
+								<label for="categoria" class="form-label">Aula</label>
+								<div class="input-group">
+									<span class="input-group-text"><i class="fa-solid fa-tags"></i></i></span>
+									<select class="form-select" th:field="*{aula}">
+										<option value="" selected hidden="hidden">--Seleccione--
+										</option>
+										<option th:each="item:${lstAula}" th:value="${item.idAula}"
+											th:text="${item.nombreAula}">
+										</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-6 position-relative">
+								<label for="categoria" class="form-label">Horario</label>
+								<div class="input-group">
+									<span class="input-group-text"><i class="fa-solid fa-tags"></i></i></span>
+									<select class="form-select" th:field="*{horario}">
+										<option value="" selected hidden="hidden">--Seleccione--
+										</option>
+										<option th:each="item:${lstHorario}" th:value="${item.idHorario}"
+											th:text="${item.descripcionHorario}">
+										</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-6 position-relative">
+								<label for="categoria" class="form-label">Docente</label>
+								<div class="input-group">
+									<span class="input-group-text"><i class="fa-solid fa-tags"></i></i></span>
+									<select class="form-select" th:field="*{docente}">
+										<option value="" selected hidden="hidden">--Seleccione--
+										</option>
+										<option th:each="item:${lstDocente}" th:value="${item.idDocente}"
+											th:text="${item.nombreDocente}">
+										</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-12 d-flex justify-content-between">
+								<!-- Botón Regresar -->
+								<a th:href="@{/curso/listadocurso}" class="btn btn-outline-dark">
+									<i class="fa-solid fa-reply"></i> Regresar
+								</a>
+								<!-- Botón Registrar -->
+								<button type="submit" class="btn btn-primary">
+									<i class="fa-solid fa-floppy-disk"></i> Registrar
+								</button>
+								<!-- Botón Limpiar -->
+								<button type="reset" class="btn btn-secondary">
+									<i class="fa-solid fa-broom"></i> Limpiar
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</th:block>
+	<th:block th:fragment="scripts">
+		<script type="text/javascript">
+			$(document)
+				.ready(
+					function () {
+						$("")
+							.validate(
+								{
+									rules: {
+
+									},
+									messages: {
+
+									},
+									errorElement: 'div',
+									errorClass: 'invalid-tooltip',
+									highlight: function (element) {
+										$(element).addClass(
+											'is-invalid')
+											.removeClass(
+												'is-valid');
+									},
+									unhighlight: function (element) {
+										$(element).removeClass(
+											'is-invalid')
+											.addClass(
+												'is-valid');
+									}
+								});
+					});
+		</script>
+</body>
+
+</html>
