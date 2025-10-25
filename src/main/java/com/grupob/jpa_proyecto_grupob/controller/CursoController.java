@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.grupob.jpa_proyecto_grupob.dto.CursoFilter;
 import com.grupob.jpa_proyecto_grupob.service.AulaService;
@@ -13,7 +14,8 @@ import com.grupob.jpa_proyecto_grupob.service.DocenteService;
 import com.grupob.jpa_proyecto_grupob.service.HorarioService;
 import com.grupob.jpa_proyecto_grupob.service.SedeService;
 
-@Controller("curso")
+@Controller
+@RequestMapping("curso")
 public class CursoController {
 	
 	@Autowired
@@ -35,6 +37,7 @@ public class CursoController {
 	@GetMapping("listadocurso")
 	public String listado(Model model) {
 		model.addAttribute("lstCurso", cursoService.getAll());
+		model.addAttribute("lstCurso2", cursoService.getAll());
 		model.addAttribute("lstSede", sedeService.getAll());
 		model.addAttribute("lstAula", aulaService.getAll());
 		model.addAttribute("lstHorario", horarioService.getAll());
@@ -43,9 +46,10 @@ public class CursoController {
 		return "curso/listadocurso";
 	}
 	
-	@GetMapping("listadocurso")
+	@GetMapping("filtrocurso")
 	public String listado(@ModelAttribute CursoFilter filter, Model model) {
 		model.addAttribute("lstCurso", cursoService.search(filter));
+		model.addAttribute("lstCurso2", cursoService.getAll());
 		model.addAttribute("lstSede", sedeService.getAll());
 		model.addAttribute("lstAula", aulaService.getAll());
 		model.addAttribute("lstHorario", horarioService.getAll());
