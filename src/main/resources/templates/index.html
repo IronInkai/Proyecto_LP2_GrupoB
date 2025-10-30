@@ -1,16 +1,20 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layoutBase(~{::contenido}, ~{::scripts})}">
 
-<head>
-	<title>titulo</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-</head>
+<th:block th:fragment="contenido">
+    <div class="container mt-4">
+        <h1 class="text-center">Bienvenido al sistema</h1>
+        <div class="text-center mt-3">
+            <a th:href="@{/curso/listadocurso}" class="btn btn-primary m-2">Ver cursos</a>
+            <a th:href="@{/matricula/listado}" class="btn btn-success m-2">Matrículas (vista alumno)</a>
+            <a th:href="@{/alumno/listadocurso}" class="btn btn-info m-2">Ver cursos (Vista alumno)</a>
+        </div>
+    </div>
+</th:block>
 
-<body>
-	<h1>Que hacer?</h1>
-	<a th:href="@{/curso/listadocurso}"> Ver cursos</a>
-	<a th:href="@{/matricula/listado}"> Matrículas (vista alumno)</a>
-	<a th:href="@{/alumno/listadocurso}">Ver cursos (Vista alumno)</a>
-	<a></a>
-</body>
+<th:block th:fragment="scripts">
+    <th:block th:utext="${alert}"></th:block>
+</th:block>
+
 </html>
