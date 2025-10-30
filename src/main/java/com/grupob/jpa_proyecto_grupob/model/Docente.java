@@ -27,5 +27,18 @@ public class Docente {
 	@Column(name = "apellido_docente")
 	private String apellidoDocente;
 	
+	@Column(name = "correo_profe")
+	private String correoProfe;
 	
+	@Column(name = "clave_profe")
+	private String claveProfe;
+	
+	@Column(name = "celular_profe")
+	private String CelularProfe;
+	
+	@Column(name = "fecha_ingreso")
+	private String fechaIngreso;
+	
+	@Column(name = "estado")
+	private Boolean estado;
 }
