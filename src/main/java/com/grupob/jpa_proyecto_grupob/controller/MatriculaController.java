@@ -48,10 +48,26 @@ public class MatriculaController {
 	}
 	
 	@GetMapping("listado")
-	public String listado(Model model) {
-		model.addAttribute("lstBoleta", matriculaService.getAll());
-		return "matricula/listado";
+	public String listado(Model model, HttpSession session) {
+		
+	    Integer idUsuario = (Integer) session.getAttribute("idUsuario");
+	    Integer idTipo = (Integer) session.getAttribute("idTipo"); 
+
+	    if (idUsuario == null) {
+	        model.addAttribute("alert", Alert.sweetAlertInfo("Sesión expirada, vuelva a iniciar sesión."));
+	        return "redirect:/login";
+	    }
+
+	    if (idTipo != 2) {
+	        model.addAttribute("lstMatricula", matriculaService.getAll());
+	    } else {
+	        List<Matricula> matriculas = matriculaService.getByUsuarioSesion(session);
+	        model.addAttribute("lstMatricula", matriculas);
+	    }
+
+	    return "matricula/listado";
 	}
+
 
 	@GetMapping("filtrar")
 	public String filtrar(Model model) {
@@ -60,8 +76,8 @@ public class MatriculaController {
 
 	@GetMapping("nuevo")
 	public String nuevo(Model model) {
-		model.addAttribute("productoSeleccionado", new CursoSeleccionado());
-		model.addAttribute("productos", cursoService.getAll());
+		model.addAttribute("cursoSeleccionado", new CursoSeleccionado());
+		model.addAttribute("cursos", cursoService.getAll());
 		return "matricula/nuevo";
 	}
 

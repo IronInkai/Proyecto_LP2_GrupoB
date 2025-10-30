@@ -14,7 +14,7 @@ public class CursoSeleccionado {
 	private Integer idCurso;
 	private String nombreCurso;
 	private LocalDate fechaInicio;
-	private Horario horario;
-	private Docente docente;
+	private String horario;
+	private String docente;
 
 }
