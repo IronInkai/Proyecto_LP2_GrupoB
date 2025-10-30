@@ -6,10 +6,10 @@
 			<div class="card-body">
 				<div class="row">
 					<div class="col-md-10">
-						<h1 class="card-title">Listado de Cursos</h1>
+						<h1 class="card-title">Listado de Docentes</h1>
 					</div>
 					<div th:if="${session.idTipo != 2}" class="col-md-2">
-						<a th:href="@{/curso/nuevo}" class="btn btn-success w-100"> <i class="fa-solid fa-plus"></i>
+						<a th:href="@{/docente/nuevo}" class="btn btn-success w-100"> <i class="fa-solid fa-plus"></i>
 							Nuevo
 						</a>
 					</div>
@@ -17,30 +17,30 @@
 				<div class="row mb-3">
 					<fieldset class="border border-2 border-dark pb-2">
 						<legend class="float-none w-auto px-2">Filtros</legend>
-						<form th:action="@{/curso/filtrocurso}" method="get" th:object="${filter}">
+						<form th:action="@{/docente/filtrodocente}" method="get" th:object="${filter}">
 							<div class="row align-items-end">
 								<div class="col-md-3">
-									<label for="nombreCurso" class="form-label">Nombre Curso</label>
+									<label for="nombreCurso" class="form-label">Nombre Docente</label>
 									<div class="input-group">
 										<span class="input-group-text"><i
 												class="fa-solid fa-chalkboard-user"></i></span>
-										<select class="form-select" th:field="*{nombreCurso}">
+										<select class="form-select" th:field="*{nombreDocente}">
 											<option value="-1">--Todos--</option>
-											<option th:each="item:${lstCursoaux}" th:value="${item.nombreCurso}"
-												th:text="${item.nombreCurso}">
+											<option th:each="item:${lstDocenteaux}" th:value="${item.nombreDocente}"
+												th:text="${item.nombreDocente}">
 											</option>
 										</select>
 									</div>
 								</div>
 								<div class="col-md-3">
-									<label for="sede" class="form-label">Sede</label>
+									<label for="sede" class="form-label">Apellidos Docente</label>
 									<div class="input-group">
 										<span class="input-group-text"><i class="fa-solid fa-truck-fast"></i></span>
-										<select class="form-select" th:field="*{idSede}">
+										<select class="form-select" th:field="*{apellidoDocente}">
 											<option value="-1">--Todos--
 											</option>
-											<option th:each="item:${lstSede}" th:value="${item.idSede}"
-												th:text="${item.nombreSede}">
+											<option th:each="item:${lstDocenteaux}" th:value="${item.apellidoDocente}"
+												th:text="${item.apellidoDocente}">
 											</option>
 										</select>
 									</div>
@@ -49,7 +49,7 @@
 									<button type="submit" class="btn btn-outline-dark">
 										<i class="fa-solid fa-binoculars"></i> Buscar
 									</button>
-									<a th:href="@{/curso/listadocurso}" class="btn btn-outline-secondary">
+									<a th:href="@{/docente/listadodocente}" class="btn btn-outline-secondary">
 										<i class="fa-solid fa-broom"></i> Limpiar
 									</a>
 								</div>
@@ -63,31 +63,41 @@
 						<thead class="table-dark text-center">
 							<tr>
 								<th>ID</th>
-								<th>Nombre Curso</th>
-								<th>Fecha Inicio</th>
-								<th>Fecha Fin</th>
-								<th>Sede</th>
-								<th>Aula</th>
-								<th>Horario</th>
-								<th>Docente</th>
+								<th>Nombre</th>
+								<th>Apellido</th>
+								<th>Correo</th>
+								<th>Celular</th>
+								<th>Fecha de Ingreso</th>
+								<th>Estado</th>
 								<th>Acciones</th>
 							</tr>
 						</thead>
 						<tbody class="table-secondary text-nowrap">
-							<tr th:each="item : ${lstCurso}">
-								<td th:text="${item.idCurso}" class="text-center"></td>
-								<td th:text="${item.nombreCurso}" class="text-center"></td>
-								<td th:text="${item.fechaInicio}" class="text-center"></td>
-								<td th:text="${item.fechaFin}" class="text-center"></td>
-								<td th:text="${item.sede.nombreSede}"></td>
-								<td th:text="${item.aula.nombreAula}"></td>
-								<td th:text="${item.horario.descripcionHorario}" class="text-center"></td>
-								<td th:text="|${item.docente.nombreDocente} ${item.docente.apellidoDocente}|"></td>
+							<tr th:each="item : ${lstDocente}">
+								<td th:text="${item.idDocente}" class="text-center"></td>
+								<td th:text="${item.nombreDocente}" class="text-center"></td>
+								<td th:text="${item.apellidoDocente}" class="text-center"></td>
+								<td th:text="${item.correoProfe}" class="text-center"></td>
+								<td th:text="${item.celularProfe}"></td>
+								<td th:text="${item.fechaIngreso}"></td>
+								<td class="text-center">
+									<span class="badge"
+										th:classappend="${item.activo} ? ' bg-success' : ' bg-secondary'"
+										th:text="${item.activo} ? 'Activo' : 'Inactivo'">
+									</span>
+								</td>
 								<td class="text-center align-middle">
-									<a th:href="@{/curso/edicion/{id}(id=${item.idCurso})}"
+									<a th:href="@{/docente/edicion/{id}(id=${item.idDocente})}"
 										class="btn btn-outline-secondary" title="Editar" role="button">
 										<i class="fa-regular fa-pen-to-square"></i>
 									</a>
+									<form method="post" th:action="@{/docente/cambiar-estado}">
+										<div class="form-switch">
+											<input type="hidden" name="id" th:value="${item.idDocente}">
+											<input class="form-check-input" type="checkbox" th:checked="${item.activo}"
+												onchange="this.form.submit()">
+										</div>
+									</form>
 								</td>
 							</tr>
 						</tbody>

@@ -20,10 +20,24 @@ public class CursoService {
 		return cursoRepository.findAllByOrderByIdCursoDesc();
 	}
 	
-	public List<Curso> search(CursoFilter cursoFilter){
-		return cursoRepository.findAllWithFilters(cursoFilter.getNombreCurso(),cursoFilter.getIdSede());
+	public List<Curso> searchAll(CursoFilter curFilter) {
+
+		if (("-1").equals(curFilter.getNombreCurso()) && curFilter.getIdSede() == -1) {
+			return cursoRepository.findAllByOrderByIdCursoDesc();
+		}
+		if (!("-1").equals(curFilter.getNombreCurso()) && curFilter.getIdSede() == -1) {
+			return cursoRepository.findAllByNomCurso(curFilter.getNombreCurso());
+		}
+		if (("-1").equals(curFilter.getNombreCurso()) && curFilter.getIdSede() != -1) {
+			return cursoRepository.findAllByIdSede(curFilter.getIdSede());
+		} 
+		if (!("-1").equals(curFilter.getNombreCurso()) && curFilter.getIdSede() != -1){
+			return cursoRepository.findAllWithFilters(curFilter.getNombreCurso(),curFilter.getIdSede());
+		}
+		else {
+			return cursoRepository.findAll();
+		}
 	}
-	
 	public ResultadoResponse create(Curso curso) {
 		try {
 			Curso cursoRegistrado = cursoRepository.save(curso);

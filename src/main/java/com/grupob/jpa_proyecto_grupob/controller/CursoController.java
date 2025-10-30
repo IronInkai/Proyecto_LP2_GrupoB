@@ -42,23 +42,17 @@ public class CursoController {
 	@GetMapping("listadocurso")
 	public String listado(Model model) {
 		model.addAttribute("lstCurso", cursoService.getAll());
-		model.addAttribute("lstCurso2", cursoService.getAll());
+		model.addAttribute("lstCursoaux", cursoService.getAll());
 		model.addAttribute("lstSede", sedeService.getAll());
-		model.addAttribute("lstAula", aulaService.getAll());
-		model.addAttribute("lstHorario", horarioService.getAll());
-		model.addAttribute("lstDocente", docenteService.getAll());
 		model.addAttribute("filter", new CursoFilter());
 		return "curso/listadocurso";
 	}
 	
 	@GetMapping("filtrocurso")
 	public String listado(@ModelAttribute CursoFilter filter, Model model) {
-		model.addAttribute("lstCurso", cursoService.search(filter));
-		model.addAttribute("lstCurso2", cursoService.getAll());
+		model.addAttribute("lstCurso", cursoService.searchAll(filter));
+		model.addAttribute("lstCursoaux", cursoService.getAll());
 		model.addAttribute("lstSede", sedeService.getAll());
-		model.addAttribute("lstAula", aulaService.getAll());
-		model.addAttribute("lstHorario", horarioService.getAll());
-		model.addAttribute("lstDocente", docenteService.getAll());
 		model.addAttribute("filter", filter);
 		return "curso/listadocurso";
 	}
@@ -111,7 +105,7 @@ public class CursoController {
 			model.addAttribute("lstAula", aulaService.getAll());
 			model.addAttribute("lstHorario", horarioService.getAll());
 			model.addAttribute("lstDocente", docenteService.getAll());
-			return "producto/nuevo";
+			return "curso/edicion";
 		}
 	
 		flash.addFlashAttribute("toast", Alert.sweetToast(response.mensaje, "success", 5000));

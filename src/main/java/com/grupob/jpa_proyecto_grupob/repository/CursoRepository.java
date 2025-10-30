@@ -10,6 +10,28 @@ import com.grupob.jpa_proyecto_grupob.model.Curso;
 
 public interface CursoRepository extends JpaRepository<Curso, Integer>{
 	List<Curso> findAllByOrderByIdCursoDesc();
+
+	@Query("""
+			select c from Curso c
+			where
+				(:idSede is null or c.sede.idSede = :idSede)
+			order by
+				c.idCurso desc
+			""")
+	List<Curso> findAllByIdSede(
+			@Param("idSede") Integer idSede
+	);
+	
+	@Query("""
+			select c from Curso c
+			where
+				(:nombreCurso is null or c.nombreCurso = :nombreCurso)
+			order by
+				c.idCurso desc
+			""")
+	List<Curso> findAllByNomCurso(
+			@Param("nombreCurso") String nombreCurso
+	);
 	
 	
 	@Query("""

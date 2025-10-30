@@ -21,30 +21,31 @@ import lombok.Setter;
 @Entity
 @Table(name = "tbl_matricula")
 @DynamicInsert
-@Getter @Setter
+@Getter
+@Setter
 public class Matricula {
 	@Id
 	@Column(name = "id_matricula")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idMatricula;
-	
-	@Column(name = "costo")
-	private Double costo;
-	
-	@Column(name = "fecha_matricula")
-	private LocalDate fechaMatricula;
-	
-	@Column(name = "activo")
-	private Boolean activo;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "id_curso")
 	private Curso curso;
-	
+
+	@Column(name = "costo")
+	private Double costo;
+
+	@Column(name = "fecha_matricula")
+	private LocalDate fechaMatricula;
+
+	@Column(name = "activo")
+	private Boolean activo;
+
 	@OneToMany(mappedBy = "matricula", cascade = CascadeType.ALL)
 	private List<DetalleMatricula> lstDetalleMatricula;
 }

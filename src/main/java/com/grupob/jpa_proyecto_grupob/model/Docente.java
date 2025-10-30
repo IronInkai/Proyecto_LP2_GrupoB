@@ -1,5 +1,7 @@
 package com.grupob.jpa_proyecto_grupob.model;
 
+import java.time.LocalDate;
+
 import org.hibernate.annotations.DynamicInsert;
 
 import jakarta.persistence.Column;
@@ -27,5 +29,15 @@ public class Docente {
 	@Column(name = "apellido_docente")
 	private String apellidoDocente;
 	
+	@Column(name = "correo_profe")
+	private String correoProfe;
 	
+	@Column(name = "celular_profe")
+	private String celularProfe;
+	
+	@Column(name = "fecha_ingreso")
+	private LocalDate fechaIngreso;
+	
+	@Column(name = "estado")
+	private Boolean activo;
 }

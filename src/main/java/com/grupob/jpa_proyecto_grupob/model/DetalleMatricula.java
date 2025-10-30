@@ -25,6 +25,6 @@ public class DetalleMatricula {
 	
 	@Id
 	@ManyToOne
-	@JoinColumn(name = "id_producto")
+	@JoinColumn(name = "id_curso")
 	private Curso curso;
 }
