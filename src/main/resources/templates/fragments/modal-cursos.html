@@ -1,4 +1,4 @@
-<div th:fragment="modal-cursos(cursos, idModal)">
+<th:block th:fragment="modal-cursos(cursos, idModal)">
 	<div class="modal fade" th:id="${idModal}" tabindex="-1">
 		<div class="modal-dialog modal-dialog-centered modal-lg">
 			<div class="modal-content">
@@ -17,20 +17,23 @@
 									<th>Inicio</th>
 									<th>Horario</th>
 									<th>Profesor</th>
+									<th>Acciones</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr th:each="prod : ${cursos}">
 									<td th:text="${prod.idCurso}" class="text-center"></td>
 									<td th:text="${prod.nombreCurso}"></td>
-									<td th:text="${#dates.format(prod.fechaRegistro, 'dd/MM/yyyy')}"></td>
+									<td th:text="${#temporals.format(prod.fechaInicio, 'dd/MM/yyyy')}"></td>
 									<td th:text="${prod.horario}"></td>
-									<td th:text="${prod.docente}"></td>
+									<td th:text="${prod.docente.nombreDocente}"></td>
 									<td>
 										<button type="button" class="btn btn-primary btnSeleccionar"
-											th:data-id-producto="${prod.idCurso}"
-											th:data-descripcion="${prod.nombreCurso}">
-											Seleccionar
+										        th:data-id-curso="${prod.idCurso}"
+										        th:data-nombre-curso="${prod.nombreCurso}"
+										        th:data-horario="${prod.horario}"
+										        th:data-docente="${prod.docente.nombreDocente}">
+										    Seleccionar
 										</button>
 									</td>
 								</tr>
@@ -41,4 +44,4 @@
 			</div>
 		</div>
 	</div>
-</div>
+</th:block>
