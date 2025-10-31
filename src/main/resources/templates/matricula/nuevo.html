@@ -150,7 +150,48 @@
 			});
 		});
 	</script>
-
+	<script>
+			$(document).ready(function () {
+				$("#form").validate({
+					rules: {
+						idCurso: {
+							required: true
+						},
+						nombreCurso: {
+							required: true
+						},
+						horario: {
+							required: true
+						},
+						docente: {
+							required: true
+						}
+					},
+					messages: {
+						idCurso: {
+							required: "campo requerido"
+						},
+						nombreCurso: {
+							required: "campo requerido"
+						},
+						horario: {
+							required: "campo requerido"
+						},
+						docente: {
+							required: "campo requerido"
+						}
+					},
+					errorElement: 'div',
+					errorClass: 'invalid-tooltip',
+					highlight: function (element) {
+						$(element).addClass('is-invalid').removeClass('is-valid');
+					},
+					unhighlight: function (element) {
+						$(element).removeClass('is-invalid').addClass('is-valid');
+					}
+				});
+			});
+		</script>
 </th:block>
 
 </html>

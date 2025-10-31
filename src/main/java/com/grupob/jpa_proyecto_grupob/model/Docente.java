@@ -29,10 +29,10 @@ public class Docente {
 	@Column(name = "apellido_docente")
 	private String apellidoDocente;
 	
-	@Column(name = "correo_profe")
+	@Column(name = "correo_docente")
 	private String correoProfe;
 	
-	@Column(name = "celular_profe")
+	@Column(name = "celular_docente")
 	private String celularProfe;
 	
 	@Column(name = "fecha_ingreso")

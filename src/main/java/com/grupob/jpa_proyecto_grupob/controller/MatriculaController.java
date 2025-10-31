@@ -90,7 +90,7 @@ public class MatriculaController {
 				.anyMatch(item -> item.getIdCurso() == seleccionado.getIdCurso());
 
 		if (existeProducto) {
-			model.addAttribute("alert", Alert.sweetAlertInfo("El producto ya fue seleccionado"));
+			model.addAttribute("alert", Alert.sweetAlertInfo("El Curso ya fue seleccionado"));
 			return "matricula/nuevo";
 		}
 
@@ -108,6 +108,10 @@ public class MatriculaController {
 		model.addAttribute("cursos", cursoService.getAll());
 		model.addAttribute("cursoSeleccionado", new CursoSeleccionado());
 		return "matricula/nuevo";
+		
+		
+		
+		
 	}
 
 	@PostMapping("registrar")

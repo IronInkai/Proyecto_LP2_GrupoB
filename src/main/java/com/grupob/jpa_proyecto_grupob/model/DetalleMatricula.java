@@ -20,7 +20,7 @@ public class DetalleMatricula {
 	
 	@Id
 	@ManyToOne
-	@JoinColumn(name = "num_boleta")
+	@JoinColumn(name = "id_matricula")
 	private Matricula matricula;
 	
 	@Id
